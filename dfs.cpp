@@ -1,20 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define vi vector<int>
-#define pb push_back
-#define fi first
-#define se second
-#define ll long long
 
-vi adj[1001];
-int vis[1001];
+// Initiate the data structures
+vector<int> adj[1001]; // Adj list
+int vis[1001]; // Visited list
 
 void dfs(int x) {
+  // set actual node as visited
   vis[x] = 1;
 
   // Here manipulate the visited node.
 
+  // If not visited, then visit next node
   for (auto v: adj[x]) {
     if (!vis[v]) dfs(v);
   }
