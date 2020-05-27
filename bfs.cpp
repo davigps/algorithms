@@ -1,31 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define vi vector<int>
-#define pb push_back
-#define fi first
-#define se second
-#define ll long long
-
-vi adj[1001];
-int vis[1001];
-int distance[1001]
+// Initiate data structures
+vector<int> adj[1001]; // adj list 
+int vis[1001]; // visited list
+int distance[1001] // distance list (optional)
 
 void bfs(int i) {
+  // create node queue
   queue<int> q;
 
+  // add first node to the queue and set as visited
   q.push(i);
   vis[i] = 1;
   distance[i] = 0;
 
+  // start bfs
   while (!q.empty()) {
+    // get and remove actual node
     int front = q.front(); q.pop();
 
     // Manipule node
     
+    // See all next nodes
     for (auto v: adj[front]) {
+      // if not visited, then visit
       if (!vis[v]) {
         vis[v] = 1;
+        // set actual distance as previous distance plus one
         distance[v] = distance[front] + 1;
         q.push(v);
       }
