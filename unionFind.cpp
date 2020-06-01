@@ -40,8 +40,12 @@ int join(int x, int y) {
 }
 
 int main() {
-  // solution
+  // Initializing set size array 
+  for (int i = 0; i < MAXN; i++) size[i] = 1;
+  // Initializing parents array
+  for (int i = 0; i < MAXN; i++) parent[i] = i;
 
+  // solution
   return 0;
 }
 
