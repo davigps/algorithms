@@ -4,7 +4,7 @@ using namespace std;
 // Initiate data structures
 vector<int> adj[1001]; // adj list 
 int vis[1001]; // visited list
-int distance[1001] // distance list (optional)
+int dis[1001]; // distance list (optional)
 
 void bfs(int i) {
   // create node queue
@@ -13,11 +13,11 @@ void bfs(int i) {
   // add first node to the queue and set as visited
   q.push(i);
   vis[i] = 1;
-  distance[i] = 0;
+  dis[i] = 0;
 
   // start bfs
   while (!q.empty()) {
-    // get and remove actual node
+    // get and remove current node
     int front = q.front(); q.pop();
 
     // Manipule node
@@ -28,7 +28,7 @@ void bfs(int i) {
       if (!vis[v]) {
         vis[v] = 1;
         // set actual distance as previous distance plus one
-        distance[v] = distance[front] + 1;
+        dis[v] = dis[front] + 1;
         q.push(v);
       }
     }
