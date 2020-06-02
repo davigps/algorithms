@@ -3,7 +3,7 @@ using namespace std;
 
 // Initiate data structures
 #define MAXN 100100
-int parent[MAXN], size[MAXN];
+int parent[MAXN], len[MAXN], size[MAXN];
 
 // Function to find parent/head of x's set
 int find(int x) {
@@ -22,26 +22,38 @@ int join(int x, int y) {
   // if its the same, then nothing to do...
   if (x == y) return;
 
-  // Size[i] represents the distance between parent i
+  // len[i] represents the distance between parent i
   // and its farthest child.
-  // if size of x is less than size of y, then new parent of x is y
-  if (size[x] < size[y]) parent[x] = y;
+  // if length of x is less than length of y, then new parent of x is y
+  // And set size of y is now increased by size of x
+  if (len[x] < len[y]) {
+    parent[x] = y;
+    size[y] += size[x];
+  }
   // Otherwise, the new parent of y is x
-  if (size[x] > size[y]) parent[y] = x;
-  // So, in general lines, the parent with smallest size will not be
+  // And set size of x is increased by size of y
+  if (len[x] > len[y]) {
+    parent[y] = x;
+    size[x] += size[y];
+  }
+  // So, in general lines, the parent with smallest length will not be
   // parent anymore
 
-  // if both have the same size, then choose one 
-  // and increase its size by one
-  if (size[x] == size[y]) {
+  // if both have the same length, then choose one 
+  // and increase its length by one
+  if (len[x] == len[y]) {
     parent[x] = y;
-    size[y]++;
+    len[y]++;
+    size[y] += size[x];
   }
 }
 
 int main() {
-  // Initializing set size array 
-  for (int i = 0; i < MAXN; i++) size[i] = 1;
+  // Initializing set length array and set size array 
+  for (int i = 0; i < MAXN; i++) {
+    len[i] = 1;
+    size[i] = 1;
+  }
   // Initializing parents array
   for (int i = 0; i < MAXN; i++) parent[i] = i;
 
