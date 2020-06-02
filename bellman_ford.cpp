@@ -1,10 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define INF (int)1e9
+#define MAXN 100100
 // Vector of edges list
 vector<tuple<int, int, int>> adj;
 // Array of distances
 int dis[1001];
+int n;
 
 // Bellman-Ford Algorithm O(n*m)
 void bellford(int x) {
@@ -20,7 +23,7 @@ void bellford(int x) {
       int a, b, w;
       tie(a, b, w) = e;
       // Update the distance to b with min value
-      distance[b] = min(distance[b], distance[a] + w);
+      dis[b] = min(dis[b], dis[a] + w);
     }
   }
 }
