@@ -5,8 +5,8 @@ using namespace std;
 #define INF (int)1e9
 
 int n, m, vis[MAXN], dis[MAXN], parent[MAXN];
-priority_queue<pair<int, int>> q;
-vector<pair<int, int>> adj[MAXN];
+priority_queue<pair<int, int> > q;
+vector<pair<int, int> > adj[MAXN];
 
 void dijk(int x) {
   for (int i = 1; i <= n; i++) dis[i] = INF;
@@ -68,4 +68,3 @@ int main() {
 
   return 0;
 }
-
