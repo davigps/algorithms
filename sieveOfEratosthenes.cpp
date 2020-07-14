@@ -6,9 +6,9 @@ bool isPrime[1000000];
 void soe(int limit) {
   for (int i = 2; i <= limit; i++) isPrime[i] = true;
 
-  for (int i = 2; i <= limit / 2; i++) {
+  for (int i = 2; i * i <= limit; i++) {
     if (isPrime[i]) {
-      for (int j = i * 2; j <= limit; j += i) {
+      for (int j = i * i; j <= limit; j += i) {
         isPrime[j] = false;
       }
     }
