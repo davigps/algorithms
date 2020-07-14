@@ -6,7 +6,7 @@ using namespace std;
 int n, segtree[4 * MAXN], array[MAXN];
 
 // SegmentTree build function
-// Must run in main with initial values, like: (v == 1, tl == 0, tr == n)
+// Must run in main with initial values, like: (v == 1, tl == 0, tr == n - 1)
 void build(int a[], int v, int tl, int tr) {
   // If the two pointers are equal, than its a leaf, so assign a value
   if (tl == tr) {
