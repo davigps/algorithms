@@ -39,7 +39,7 @@ int main() {
 
   primeFact(n);
 
-  cout << "\nPRIMOS:" << endl;
+  cout << "\nPRIMES:" << endl;
 
   int i = 1;
   while (f[i] != 0) {

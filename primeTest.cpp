@@ -12,7 +12,7 @@ int main() {
   int n;
   cin >> n;
 
-  string msg = isPrime(n) ? "É Primo!" : "Não é Primo!";
+  string msg = isPrime(n) ? "It's a Prime!" : "It's not a Prime!";
 
   cout << msg << endl;
 

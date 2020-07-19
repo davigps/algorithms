@@ -21,7 +21,7 @@ int main() {
 
   soe(n);
 
-  cout << "\nPrimos até " << n << ":" << endl;
+  cout << "\nPrimes until " << n << ":" << endl;
 
   for (int i = 0; i <= n; i++) {
     if (isPrime[i]) cout << i << endl;
