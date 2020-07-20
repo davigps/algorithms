@@ -21,35 +21,27 @@ void build(int a[], int v, int tl, int tr) {
   }
 }
 
-// As this is a Sum segment Tree, we need a sum function
-int sum(int v, int tl, int tr, int l, int r) {
-  // If is a superflous case, return zero
-  if (l > r) return 0;
-  // If its a leaf, than, return leaf value
-  if (l == tl && r == tr) return segtree[v];
-  // Otherwise, return the sum of the two children
-  int tm = (tl + tr) / 2;
-  return sum(v*2, tl, tm, l, min(r, tm)) 
-  + sum(v*2+1, tm+1, tr, max(l, tm+1), r);
+// As this is a Sum segment Tree, we need a query sum function
+int query(int v, int tl, int tr, int l, int r) {
+	if (l <= tl && tr <= r) return segtree[v];
+	if (r < tl || tr < l) return 0;
+	
+	int tm = (tl + tr) / 2;
+	return query(v*2, tl, tm, l, r) +
+				 query(v*2+1, tm+1, tr, l, r);
 }
 
 // Update the value of some position
 void update(int v, int tl, int tr, int pos, int newVal) {
-  // If its the desired leaf, than update its value
-  if (tl == tr) {
-    segtree[v] = newVal;
-  // Otherwise, update the nearest child
-  } else {
-    int tm = (tl + tr) / 2;
-    if (pos <= tm) {
-      update(v*2, tl, tm, pos, newVal);
-    } else {
-      update(v*2+1, tm+1, tr, pos, newVal);
-    }
-    // After the update, the current vertex need a update too
-    // based on its children values
-    segtree[v] = segtree[v*2] + segtree[v*2+1];
-  }
+	if (tl == tr) segtree[v] = newVal;
+	else {
+		int tm = (tl + tr) / 2;
+		
+		if (pos <= tm) update(v*2, tl, tm, pos, newVal);
+		else update(v*2+1, tm+1, tr, pos, newVal);
+		
+		segtree[v] = segtree[v*2] + segtree[v*2+1]; 
+	}
 }
 
 // Test Sum Segment Tree
@@ -98,7 +90,7 @@ int main() {
 			int l, r;
 			cin >> l >> r;
 			
-			int result = sum(1, 0, n-1, l, r);
+			int result = query(1, 0, n-1, l, r);
 			
 			cout << "The sum of this segment is " << result << endl;
 		}
