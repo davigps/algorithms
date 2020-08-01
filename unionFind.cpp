@@ -3,7 +3,7 @@ using namespace std;
 
 // Initiate data structures
 #define MAXN 100100
-int parent[MAXN], len[MAXN], size[MAXN];
+int parent[MAXN], size[MAXN];
 
 // Function to find parent/head of x's set
 int find(int x) {
@@ -22,30 +22,12 @@ int join(int x, int y) {
   // if its the same, then nothing to do...
   if (x == y) return;
 
-  // len[i] represents the distance between parent i
-  // and its farthest child.
-  // if length of x is less than length of y, then new parent of x is y
-  // And set size of y is now increased by size of x
-  if (len[x] < len[y]) {
-    parent[x] = y;
-    size[y] += size[x];
-  }
-  // Otherwise, the new parent of y is x
-  // And set size of x is increased by size of y
-  if (len[x] > len[y]) {
-    parent[y] = x;
-    size[x] += size[y];
-  }
-  // So, in general lines, the parent with smallest length will not be
-  // parent anymore
-
-  // if both have the same length, then choose one 
-  // and increase its length by one
-  if (len[x] == len[y]) {
-    parent[x] = y;
-    len[y]++;
-    size[y] += size[x];
-  }
+  // Otherwise, we need to set a parent,
+  // so we will do that on the smallest set
+  if (size[x] < size[y]) swap(x, y);
+  // The biggest set will receive the other one and be the new parent.
+  size[x] += size[y];
+  parent[y] = x;
 }
 
 int main() {
