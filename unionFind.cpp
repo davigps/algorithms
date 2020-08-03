@@ -31,13 +31,11 @@ int join(int x, int y) {
 }
 
 int main() {
-  // Initializing set length array and set size array 
+  // Initializing set size array and parents array
   for (int i = 0; i < MAXN; i++) {
-    len[i] = 1;
     size[i] = 1;
+    parent[i] = i;
   }
-  // Initializing parents array
-  for (int i = 0; i < MAXN; i++) parent[i] = i;
 
   // solution
   return 0;
