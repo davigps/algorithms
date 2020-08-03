@@ -38,7 +38,7 @@ int main() {
   int vertices, numberOfEdges;
   cin >> vertices >> numberOfEdges;
 
-  // For each Edge, build edges vector, 
+  // For each edge, build edges vector, 
   // using weight as main information of the pair
   while (numberOfEdges--) {
     int a, b, weight;
@@ -50,16 +50,21 @@ int main() {
   // Sort edges in ascending order by weight 
   sort(edges.begin(), edges.end());
 
+  // Initiate build tree cost as zero
   int cost = 0;
   for (auto edge: edges) {
     int weight = edge.first;
     int a = edge.second.first, b = edge.second.second;
 
+    // Check if "a" and "b" are already above same parent
     if (find(a) != find(b)) {
+      // If not, join them
       join(a, b);
 
+      // Add current edge weight to the total cost
       cost += weight;
 
+      // You can build the result tree here for posterior use
       tree[a].push_back({b, weight});
       tree[b].push_back({a, weight});
     }
