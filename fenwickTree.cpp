@@ -8,15 +8,15 @@ struct FenwickTree {
     
     // Initializing bits, all initialy with zero
     FenwickTree(int n) {
-        this->n = n;
-        bit.assign(n, 0);
+        this->n = n + 1;
+        bit.assign(n + 1, 0);
     }
     
     // For the sum query, decrease the index until 0.
     // Return total sum 
     int sum(int r) {
         int res = 0;
-        for (; r >= 0; r = (r & (r + 1)) - 1)
+        for (++r; r > 0; r -= r & -r)
             res += bit[r];
         return res;           
     }
@@ -30,7 +30,7 @@ struct FenwickTree {
     // For add query, increase the index until the end
     // And update its value
     void add(int idx, int val) {
-        for (; idx < n; idx = idx | (idx + 1))
+        for (++idx; idx < n; idx += idx & -idx)
             bit[idx] += val;
     }
 };
